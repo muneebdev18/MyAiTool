@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AnyAITool | Gallery</title>
+    <link rel="icon" href="favicon.png" type="image/x-icon">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="./css/output.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+
+
+    <!-- <style>
+:root {
+    --background-color: #1e1e1e;
+    --text-color: #ffffff;
+    --link-color: #66b2ff; /* Regular link color */
+    --toolbar-link-color: #ffffff; /* Toolbar link color for dark theme */
+    --toolbar-link-hover-color: #aaaaaa; /* Toolbar link hover color for dark theme */
+    --button-background: #333333;
+    --button-border: #444444;
+    --input-background: #2d2d2d;
+    --input-color: #ffffff;
+    --separator-color: rgba(255, 255, 255, 0.5); /* Separator line color for dark theme */
+    --modal-background: rgba(0, 0, 0, 0.9);
+    --modal-content-background: #333333;
+}
+
+body[data-theme='light'] {
+    --background-color: #f0f0f0;
+    --text-color: #333;
+    --link-color: #0099ff; /* Regular link color for light theme */
+    --toolbar-link-color: #000000; /* Toolbar link color for light theme */
+    --toolbar-link-hover-color: #555555; /* Toolbar link hover color for light theme */
+    --button-background: #ffffff;
+    --button-border: #ccc;
+    --input-background: #ffffff;
+    --input-color: #333;
+    --separator-color: rgba(0, 0, 0, 0.5); /* Separator line color for light theme */
+    --modal-background: rgba(211, 211, 211, 0.9);
+    --modal-content-background: #ffffff;
+}
+body {
+    font-family: Arial, sans-serif;
+    background-color: rgb(0, 0, 0);
+    background-image: radial-gradient(circle at top left, rgb(40, 40, 40), rgb(30, 30, 30), rgb(20, 20, 20));
+    background-size: cover;
+    color: var(--text-color);
+    margin: 0;
+    padding: 20px;
+    position: relative;
+}
+
+body[data-theme='light'] {
+    background-color: #ffffff;
+    background-image: radial-gradient(circle at top left, rgb(240, 240, 240), rgb(230, 230, 230), rgb(220, 220, 220));
+}
+
+body.modal-open {
+    overflow: hidden;
+}
+
+a {
+    text-decoration: none;
+    color: var(--link-color);
+}
+
+
+#searchInput,
+#filterSelect {
+    display: inline-block;
+    margin-right: 10px;
+    padding: 8px;
+    font-size: 14px;
+    background-color: var(--input-background);
+    border: 1px solid var(--button-border);
+    color: var(--input-color);
+}
+
+        button {
+            background-color: var(--button-background);
+            color: var(--text-color);
+            border: 1px solid var(--button-border);
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+.resolution-select {
+    background-color: var(--input-background);
+    color: var(--input-color);
+    border: 1px solid var(--button-border);
+    padding: 8px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-left: 820px;
+    margin-top: 10px;
+}
+.format-select {
+    background-color: var(--input-background);
+    color: var(--input-color);
+    border: 1px solid var(--button-border);
+    padding: 8px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+#download-btn {
+    background-color: var(--button-background);
+    color: var(--text-color);
+    border: 1px solid var(--button-border);
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+#searchButton {
+    display: inline-block;
+    padding: 8px;
+    font-size: 14px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+#searchButton i {
+    font-size: 18px;
+    color: var(--input-color);
+}
+
+#imageContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.image-card {
+    background-color: var(--button-background);
+    border: 1px solid var(--button-border);
+    border-radius: 5px;
+    overflow: hidden;
+    width: calc(33.333% - 10px); /* 3 images per row with a 10px gap */
+    height: 200px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow */
+}
+
+.image-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+        img {
+            max-width: 100%;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .image-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #image-container, #error-log {
+            margin-top: 20px;
+        }
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: var(--modal-background);
+}
+
+
+.modal-image {
+    max-width: 100%;
+}
+
+.modal-content {
+    margin: auto;
+    margin-top: 80px;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    background-color: var(--modal-content-background);
+}
+
+.modal-content, .modal-caption {
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+
+@keyframes zoom {
+    from {transform: scale(0)}
+    to {transform: scale(1)}
+}
+
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+@keyframes zoom {
+    from {
+        transform: scale(0);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+body[data-theme='light'] .close {
+    color: #333;
+}
+
+
+
+        .theme-toggle i.fa-circle-half-stroke:hover {
+        color: #aaaaaa;
+        }
+
+
+.toolbar a {
+    margin-right: 0;
+    padding: 0 5px;
+}
+
+.toolbar a {
+    margin-right: 0;
+    padding: 0 5px;
+    text-decoration: none;
+    color: var(--toolbar-link-color);
+}
+
+body[data-theme='light'] .toolbar a:hover {
+    color: #555555; /* Light gray for light theme */
+}
+
+body:not([data-theme='light']) .toolbar a:hover {
+    color: #aaaaaa; /* Light gray for dark theme */
+}
+
+.links {
+    display: flex;
+    align-items: center;
+}
+.container-box {
+    width: 1440px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+@media (max-width: 1024px) {
+    .container{
+        width: 80% !important;
+    }
+}
+@media (max-width: 768px) {
+    .links{
+        margin-left: 0px !important;
+        margin-top: 10px;    }
+    .toolbar a{
+        margin-bottom: 0px !important;
+    }
+    .logo-box {
+    justify-content: center;
+}
+    h1 {
+        font-size: 20px;
+        margin-top: 30px;
+    }
+
+    .download-options {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .modal-content {
+        flex-direction: column;
+    }
+
+    .modal-image {
+        max-width: 100%;
+    }
+
+    .toolbar {
+        flex-direction: column;
+        align-items: flex-start;
+
+    }
+
+    .toolbar a {
+        margin-bottom: 10px;
+    }
+
+    .links {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .theme-toggle {
+        margin-top: 10px;
+    }
+
+    .logo {
+        max-width: 100%;
+        margin-top: 1px;
+    }
+
+    #searchInput,
+    #filterSelect,
+    #searchButton {
+        width: 100%;
+        margin: 10px 0;
+        box-sizing: border-box;
+    }
+
+    #imageContainer {
+        justify-content: center;
+    }
+
+    .image-card {
+        width: calc(50% - 10px); /* 2 images per row with a 10px gap */
+    }
+
+    .modal-content {
+        flex-direction: column;
+    }
+
+        .image-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+
+    .modal-image {
+        max-width: 100%;
+        margin-bottom: 20px;
+    }
+
+        .download-options {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+
+#download-btn {
+    background-color: var(--button-background);
+    color: var(--text-color);
+    border: 1px solid var(--button-border);
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+#download-btn {
+    background-color: var(--button-background);
+    color: var(--text-color);
+    border: 1px solid var(--button-border);
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+.container-box {
+    width: 1440px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+@media (max-width: 1350px) {
+    .container-box {
+        width: 95%;
+        margin: 0 auto;
+        padding: 0 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .image-card {
+        width: calc(100% - 10px); /* 1 image per row with a 10px gap */
+    }
+}
+
+    #footer {
+        margin-top: 50px;
+    }
+}
+
+@media (max-width: 424px) {
+h1 {
+        font-size: 24px;
+                margin-bottom: 6px;
+    }
+    .links{
+            padding: 10px 12px !important;
+    }
+
+     .links a{
+            font-size: 14px;
+    }
+}
+
+.footer-links {
+    font-size: 12px;
+    margin-top: 10px;
+}
+
+#footer {
+    margin-top: 230px;
+    padding: 10px;
+    text-align: center;
+    font-size: 14px;
+    color: #ffffffaa;
+}
+
+body[data-theme='light'] #footer {
+    color: #000000; /* Change footer text to black in light theme */
+}
+
+.footer-links {
+    font-size: 12px;
+    margin-top: 10px; /* Adds space between the contact info and the links */
+}
+
+.underline {
+    position: relative;
+    display: inline-block;
+}
+
+.underline::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -5px; /* Adjust as necessary */
+    height: 5px; /* Adjust as necessary */
+    background-color: #66b2ff; /* Adjust color as necessary */
+    z-index: -1;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    flex-wrap: wrap; /* Allow pagination to wrap on smaller screens */
+}
+
+.pagination button {
+    background-color: var(--button-background);
+    border: 1px solid var(--button-border);
+    color: var(--text-color);
+    padding: 8px 16px;
+    margin: 5px; /* Adjust margin for better spacing */
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.pagination button.active {
+    background-color: var(--link-color);
+    color: #fff;
+}
+
+.pagination button.disabled {
+    background-color: var(--button-background);
+    color: #999;
+    cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+    .d-none {
+     display: none !important;
+}
+    .pagination button {
+        padding: 6px 12px; /* Adjust padding for mobile */
+        margin: 3px; /* Adjust margin for better spacing */
+    }
+}
+.separator {
+    width: 1px;
+    height: 20px;
+    background-color: var(--separator-color);
+    margin: 0 10px;
+    display: inline-block;
+    vertical-align: middle;
+    opacity: 0.5; /* 50% transparency */
+}
+.toolbar {
+    display: flex;
+    align-items: center;
+
+    justify-content: space-around;
+}
+
+.container {
+    width: 50%;
+    margin: 0 auto;
+}
+.links{
+        background-color: var(--button-background);
+    padding: 10px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    justify-content: space-between;
+}
+.logo-box {
+    display: flex;
+    align-items: center;
+     width:39%;
+}
+.logo-box i {
+    margin-left: 7px;
+}.mt-30 {
+    margin-top: 100px;
+}
+
+.logo-box img.logo {
+    width: 80%;
+}
+div {
+    display: block;
+    unicode-bidi: isolate;
+}
+.d-none{
+    opacity: 0;
+}
+
+    </style> -->
+</head>
+
+<body class="min-h-screen">
+    <div class="page-wrapper min-h-screen flex flex-col justify-between abeezee-regular">
+        <!-- Main Header-->
+        <header class="main-header">
+            <div class="auto-container flex items-center justify-between">
+                <div class="logo flex items-center">
+                    <a href="index.html"><img src="./images/logo.png" alt="Logo AnyAITool" title="AnyAITool" /></a>
+                    <h1 class="logo-title">AnyAITool</h1>
+                </div>
+                <div class="wrapper">
+                    <div class="hamburger-icon" onclick="toggleMenu()">
+                        &#9776;
+                        <!-- Triple line icon -->
+                    </div>
+                    <div class="main-menu">
+                        <div class="menu-backdrop"></div>
+
+                        <!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header-->
+                        <nav class="menu-box relative flex flex-col justify-start">
+                            <div class="upper-box relative flex items-center justify-between">
+                                <div class="theme-toggle cursor-pointer"><i id="toggleIcon" class="fa-regular fa-moon"></i></div>
+                                <div class="close-btn text-center"><i class="icon fa fa-times"></i></div>
+                            </div>
+                            <ul class="navigation">
+                                <li class="current">
+                                    <a href="index.html">Home</a>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#">AI Tools</a>
+                                    <ul>
+                                        <li><a href="image-generator.html">Image Generator</a></li>
+                                        <li><a href="text-to-speech.html">Text to Speech</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#">Others</a>
+                                    <ul>
+                                        <li><a href="blog.html">Blog</a></li>
+                                        <li>
+                                            <a href="stock.html">Stock</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Gallery Section -->
+
+        <section class="gallery-section mt-16">
+            <div class="auto-container">
+                <div class="section-title text-center">
+                    <h2 class="inline-block">Image Gallery</h2>
+                </div>
+                <div class="gallery-bar grid grid-cols-12 gap-4 mt-8">
+
+                    <div class="search-box relative col-span-12 sm:col-span-6 md:col-span-6 lg:col-span-3 flex items-center">
+                        <label for="searchInput"></label>
+                        <input type="text" id="searchInput" placeholder="Search by image name" class="w-full pl-10 pr-4 py-3">
+                        <button id="searchButton" class="absolute left-4"> <svg class="w-4 h-4 font-light" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 21 21">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.15 5.6h.01m3.337 1.913h.01m-6.979 0h.01M5.541 11h.01M15 15h2.706a1.957 1.957 0 0 0 1.883-1.325A9 9 0 1 0 2.043 11.89 9.1 9.1 0 0 0 7.2 19.1a8.62 8.62 0 0 0 3.769.9A2.013 2.013 0 0 0 13 18v-.857A2.034 2.034 0 0 1 15 15Z" />
+                            </svg></button>
+                    </div>
+                    <div class="filter-box relative col-span-12 sm:col-span-6 md:col-span-6 lg:col-span-3 flex items-center">
+
+
+                        <div class="icon-box absolute left-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-up" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5m-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5" />
+                            </svg>
+                        </div>
+                        <select id="filterSelect" class="w-full pl-10 py-3">
+                            <option value="latest" selected>Latest-Oldest</option>
+                            <option value="oldest">Oldest-Latest</option>
+                            <option value="az">A-Z</option>
+                            <option value="za">Z-A</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Image Gallery -->
+
+                <div class="image-gallery mt-7">
+                    <div class="grid grid-cols-12 gap-4">
+                        <div class="col-span-12 sm:col-span-6 lg:col-span-4">
+                            <div class="image-card">
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Pagination Controls -->
+                <div id="pagination" class="pagination flex justify-center flex-wrap mt-9"></div>
+                <!-- Modal -->
+                <div id="imageModal" class="modal">
+                    <div class="modal-box relative h-screen grid items-center grid-cols-1">
+                        <div class="close absolute cursor-pointer col-span-1"><i class="icon fa fa-times"></i></div>
+
+                        <img class="col-span-1 modal-content w-4/5 mx-auto" id="modalImage">
+                        <div class="col-span-1">
+                            <div class="mt-7 mb-8 download-options w-4/5 mx-auto grid grid-cols-7 gap-3">
+                                <select class="resolution-select col-span-3 py-3 pl-4">
+                                    <option value="1024x1024">1024x1024</option>
+                                    <option value="1792x1024">1792x1024</option>
+                                    <option value="1024x1792">1024x1792</option>
+                                </select>
+                                <select class="format-select col-span-3 py-3 pl-4" onchange="updateResolutionVisibility(this)">
+                                    <option value="webp">WebP</option>
+                                    <option value="png">PNG</option>
+                                    <option value="jpg">JPG</option>
+                                </select>
+                                <button id="downloadButton" class="col-span-1 bg-transparent border-0"><i class="fa-solid fa-file-arrow-down"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <!-- Main Footer -->
+        <footer id="footer" class="main-footer">
+            <div class="auto-container">
+                <div class="call-to-action text-center mt-16">
+                    <h2>Have any question? Get in touch with us</h2>
+                    <a href="mailto:info@makingwithai.com">info@makingwithai.com</a>
+                </div>
+            </div>
+            <div class="user-links">
+                <div class="auto-container flex justify-evenly">
+                    <a href="privacy-policy.html">Privacy Policy</a>
+                    <a href="terms-and-conditions.html">Terms & Conditions</a>
+                    <a href="faq.html">FAQ</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+            </div>
+            <div class="copyright-text text-center">&copy; 2024 AnyAITool</div>
+        </footer>
+    </div>
+
+    </div>
+    <script src="./js/imagesData.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchInput = document.getElementById('searchInput');
+            const searchButton = document.getElementById('searchButton');
+            const filterSelect = document.getElementById('filterSelect');
+            const imageContainer = document.getElementById('imageContainer');
+            const modal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            const closeModalButton = document.querySelector('.close');
+            const toggleIcon = document.getElementById('toggleIcon');
+            const modalFormatSelect = document.getElementById('modalFormatSelect');
+            const modalResolutionSelect = document.getElementById('modalResolutionSelect');
+            const downloadButton = document.getElementById('downloadButton');
+            const pagination = document.getElementById('pagination');
+
+            let currentImage = null;
+            let currentPage = 1;
+            let imagesPerPage = window.innerWidth <= 768 ? 9 : 19;
+
+            // Function to update the number of images per page based on screen width
+            function updateImagesPerPage() {
+                imagesPerPage = window.innerWidth <= 768 ? 9 : 19;
+            }
+
+            // Event listener to update images per page on window resize
+            window.addEventListener('resize', () => {
+                updateImagesPerPage();
+                filterImages();
+            });
+
+            // Function to display images in the image container
+            function displayImages(filteredImages, page = 1) {
+                const imageGallery = document.querySelector('.image-gallery .grid');
+                imageGallery.innerHTML = '';  // Clear existing content
+
+                const startIndex = (page - 1) * imagesPerPage;
+                const endIndex = page * imagesPerPage;
+                const imagesToDisplay = filteredImages.slice(startIndex, endIndex);
+
+                imagesToDisplay.forEach((image) => {
+                    const colContainer = document.createElement('div');
+                    colContainer.className = 'col-span-6 sm:col-span-6 md:col-span-4 lg:col-span-3';
+
+                    const imageCard = document.createElement('div');
+                    imageCard.className = 'image-card';
+
+                    const img = document.createElement('img');
+                    img.src = image.src;
+                    img.alt = image.name;
+                    img.className = 'rounded-lg';
+
+                    imageCard.appendChild(img);
+
+                    colContainer.appendChild(imageCard);
+
+                    imageGallery.appendChild(colContainer);
+
+                    img.addEventListener('click', () => openModal(image));
+                });
+
+                // Display pagination if needed
+                if (filteredImages.length > imagesPerPage) {
+                    displayPagination(filteredImages.length, page);
+                } else {
+                    pagination.innerHTML = '';
+                }
+            }
+
+            // Function to handle image download
+            function downloadImage(src, format, resolution) {
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                const img = new Image();
+
+                img.crossOrigin = 'anonymous';
+                img.src = src;
+
+                img.onload = () => {
+                    const [width, height] = resolution.split('x').map(Number);
+                    canvas.width = width;
+                    canvas.height = height;
+                    ctx.drawImage(img, 0, 0, width, height);
+
+                    const link = document.createElement('a');
+                    link.href = canvas.toDataURL(`image/${format}`);
+                    link.download = `downloaded-image.${format}`;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                };
+            }
+
+            // Function to open the modal with selected image
+            function openModal(image) {
+                currentImage = image;
+                modal.style.display = 'block';
+                document.body.classList.add('modal-open');
+                modalImage.src = image.src;
+                modalImage.alt = image.name;
+            }
+
+            // Function to close the modal
+            function closeModal() {
+                modal.style.display = 'none';
+                document.body.classList.remove('modal-open');
+            }
+
+            // Event listener to close the modal when clicking outside of it
+            window.addEventListener('click', (event) => {
+                const modal = document.querySelector('.modal-box')
+                if (event.target == modal) {
+                    closeModal();
+                }
+            });
+
+            // Function to filter images based on search and filter criteria
+            function filterImages() {
+                const searchValue = searchInput.value.toLowerCase();
+                const filterValue = localStorage.getItem('filter') || filterSelect.value;
+
+                let filteredImages = images.filter(image => {
+                    return image.name.toLowerCase().includes(searchValue);
+                });
+
+                if (filterValue === 'latest') {
+                    filteredImages.reverse();
+                } else if (filterValue === 'oldest') {
+                    // No need to change the order, as it is already oldest first
+                } else if (filterValue === 'az') {
+                    filteredImages.sort((a, b) => a.name.localeCompare(b.name));
+                } else if (filterValue === 'za') {
+                    filteredImages.sort((a, b) => b.name.localeCompare(a.name));
+                }
+
+                currentPage = 1; // Reset to first page on new filter/search
+                displayImages(filteredImages, currentPage);
+            }
+
+            // Function to display pagination controls
+            function displayPagination(totalImages, page) {
+                const totalPages = Math.ceil(totalImages / imagesPerPage);
+                pagination.innerHTML = '';
+
+                for (let i = 1; i <= totalPages; i++) {
+                    const button = document.createElement('button');
+                    button.textContent = i;
+                    button.classList.toggle('active', i === page);
+                    button.classList.toggle('disabled', i === page);
+                    button.disabled = i === page;
+                    button.addEventListener('click', () => {
+                        currentPage = i;
+                        displayImages(images, currentPage);
+                    });
+                    pagination.appendChild(button);
+                }
+            }
+
+
+            // Function to apply the saved filter from local storage
+            function applySavedFilter() {
+                const savedFilter = localStorage.getItem('filter');
+                if (savedFilter) {
+                    filterSelect.value = savedFilter;
+                }
+            }
+
+
+            // Event listeners for various interactions
+            searchButton.addEventListener('click', filterImages);
+            filterSelect.addEventListener('change', () => {
+                localStorage.setItem('filter', filterSelect.value);
+                filterImages();
+            });
+            closeModalButton.addEventListener('click', closeModal);
+            downloadButton.addEventListener('click', () => {
+                if (currentImage) {
+                    const format = document.querySelector('.format-select').value;
+                    const resolution = document.querySelector('.resolution-select').value;
+                    downloadImage(currentImage.src, format, resolution);
+                }
+            });
+
+            // Initial setup to display images and apply saved settings
+            applySavedFilter();
+            updateImagesPerPage(); // Set images per page based on initial screen size
+            filterImages();
+        });
+    </script>
+    <script src="./js/index.js"></script>
+    <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3360006850930559" crossorigin="anonymous"></script> -->
+</body>
+
+</html>

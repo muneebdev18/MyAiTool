@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3360006850930559"
+      crossorigin="anonymous"
+      async
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.3/axios.min.js"
+      integrity="sha512-zJXKBryKlsiDaWcWQ9fuvy50SG03/Qc5SqfLXxHmk9XiUUbcD9lXYjHDBxLFOuZSU6ULXaJ69bd7blSMEgxXNQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Making With AI | Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="icon" href="favicon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="./index.css" />
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="hamburger-icon" onclick="toggleMenu()">
+        &#9776;
+        <!-- Triple line icon -->
+      </div>
+      <div class="menu" id="menu">
+        <h4><span class="underline">AI Tools</span></h4>
+        <a href="./image-generator/">Image Generator</a>
+        <div class="horizontal-separator"></div>
+        <a href="./text-to-speech/">Text to Speech</a>
+        <div class="horizontal-separator"></div>
+        <h4><span class="underline">Others</span></h4>
+        <a href="./blog/">Blog</a>
+        <div class="horizontal-separator"></div>
+        <a href="./stock/">Stock</a>
+      </div>
+    </div>
+    <img src="./logo_black.png" alt="Logo" class="logo" />
+    <div class="theme-toggle"><i id="toggleIcon" class="fa-solid fa-circle-half-stroke"></i></div>
+
+    <form id="tts-form">
+      <textarea id="text-input" rows="4" cols="50" placeholder="Enter text here..."></textarea><br>
+      <button type="submit">Synthesize</button>
+  </form>
+  <p id="loading">Loading... Please wait.</p>
+  <audio id="audio-output" controls></audio>
+
+    <footer id="footer">
+      &copy; 2024 Making With AI | Contact: <a href="mailto:info@makingwithai.com">info@makingwithai.com</a>
+      <div class="footer-links">
+        <a href="../privacy-policy">Privacy Policy</a> | <a href="../terms-and-conditions">Terms & Conditions</a> |
+        <a href="../faq">FAQ</a>
+      </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/deeplab"></script>
+    <script src="./index.js"></script>
+  </body>
+</html>

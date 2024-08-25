@@ -1,0 +1,99 @@
+textarea {
+  background-color: transparent;
+  border: none;
+  color: var(--input-color);
+  padding: 5px;
+  resize: none;
+}
+
+textarea:focus {
+  outline: none;
+}
+
+#error-log {
+  display: none;
+  background-color: var(--button-background);
+  color: var(--link-color2);
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.archive-item {
+  position: relative;
+}
+
+.archive-item img {
+  max-width: 200px;
+}
+
+.delete-btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 3px 10px;
+}
+
+.archive-toggle {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.archive-toggle i {
+  transition: transform 0.3s;
+}
+
+.archive-toggle i.rotate {
+  transform: rotate(90deg);
+}
+
+#rate-limit-message {
+  background-color: #ff4444;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.spinner {
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top: 4px solid #ffffff;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin: 20px auto;
+  display: block !important;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.image-grid {
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+
+.image-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .image-count-select {
+    margin-left: 0;
+    width: 100%;
+  }
+}

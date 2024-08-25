@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- <script
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3360006850930559"
+      crossorigin="anonymous"
+      async
+    ></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.3/axios.min.js"
+    integrity="sha512-zJXKBryKlsiDaWcWQ9fuvy50SG03/Qc5SqfLXxHmk9XiUUbcD9lXYjHDBxLFOuZSU6ULXaJ69bd7blSMEgxXNQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AnyAITool | Home</title>
+
+  <link rel="shortcut icon" href="/images/icons/favicon.png" type="image/x-icon" />
+  <link rel="icon" href="/images/icons/favicon.png" type="image/x-icon" />
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="./css/output.css" />
+  <link rel="stylesheet" href="./css/style.css" />
+  <link rel="stylesheet" href="./css/flaticon.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+</head>
+
+<body class="min-h-screen">
+  <div class="page-wrapper min-h-screen flex flex-col justify-between abeezee-regular">
+    <!-- Main Header-->
+    <header class="main-header">
+      <div class="auto-container flex items-center justify-between">
+        <div class="logo flex items-center">
+          <a href="index.html"><img src="./images/logo.png" alt="Logo AnyAITool" title="AnyAITool" /></a>
+          <h1 class="logo-title">AnyAITool</h1>
+        </div>
+        <div class="wrapper">
+          <div class="flex justify-between gap-4 items-center">
+          <p id="loggedInUser_name" style="font-size: 16px;font-weight: 600;margin: 0px; padding: 0px;color:#fe9230; cursor: pointer;" class=""></p>
+          <div class="hamburger-icon " onclick="toggleMenu()">
+            &#9776;
+            <!-- Triple line icon -->
+          </div>
+        </div>
+          <div class="main-menu">
+            <div class="menu-backdrop"></div>
+
+            <!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header-->
+            <nav class="menu-box relative flex flex-col justify-between">
+              <div>
+                <div class="upper-box relative flex items-center justify-between">
+                  <div class="theme-toggle cursor-pointer"><i id="toggleIcon" class="fa-regular fa-moon"></i></div>
+                  <div class="close-btn text-center"><i class="icon fa fa-times"></i></div>
+                </div>
+                <ul class="navigation">
+                  <li class="current">
+                    <a href="index.html">Home</a>
+                  </li>
+                  <li class="dropdown">
+                    <a href="#">AI Tools</a>
+                    <ul>
+                      <li><a href="image-generator.html">Image Generator</a></li>
+                      <li><a href="text-to-speech.html">Text to Speech</a></li>
+                    </ul>
+                  </li>
+                  <li class="dropdown">
+                    <a href="#">Others</a>
+                    <ul>
+                      <li><a href="blog.html">Blog</a></li>
+                      <li>
+                        <a href="stock.html">Stock</a>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+              <div class="flex justify-around items-center mb-[20px] auth-btns-wrapper">
+                <button id="login-button-btn" class="login-button" onclick="openModal('loginModal')">Login</button>
+                <button id="register-button-btn" class="register-button" onclick="openModal('registerModal')">Register</button>
+                <button id="logout-button-btn" onclick="logoutHandler()" class="logout-button" >Logout</button>
+              </div>
+
+            </nav>
+            <div id="loginModal"
+              class="custom-modal hidden fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+              <div class="modalWrapper bg-white p-4 rounded-lg">
+                <p class="text-black font-semibold text-[23px] text-center modal-loginWrapper text-color">Login</p>
+                <div style="font-size: 26px;top: 5px;" class="absolute right-30 p-2 top-0 text-black z-50 cursor-pointer sm:text-[26px] xsm:text-[23px] text-color"
+                  onclick="closeModal('loginModal')">X</div>
+                <div class="flex flex-col gap-x-8 modal-loginInputWrapper">
+                  <div class="flex flex-col my-3 modal-loginInput1">
+                    <label class="mb-2 text-color">Email</label>
+                    <input id="login_user_email" type="email" placeholder="Email"
+                      class="py-2 px-3  border-2 border-gray-500 outline-none rounded-md" type="text" />
+                  </div>
+                  <div class="flex flex-col my-3 modal-loginInput1">
+                    <label class="mb-2 text-color">Password</label>
+                    <input id="login_user_pass" type="password" placeholder="Password"
+                      class="py-2 px-3 border-2 border-gray-500 outline-none rounded-md" type="text" />
+                  </div>
+                  <div class="flex flex-col my-3">
+                    <button id="login-button" style=" display: table; margin: 0 auto;"
+                      class="login-button h-[50px] bg-[#070029] px-[20px] text-[15px] rounded-md text-white hover:bg-[#3a2a88]">
+                      Login
+                    </button>
+                  <p style="color: #fe9230;font-size: 18px;text-align: center; margin: 10px 0px;">OR</p>
+
+                    <a class="text-color" style="margin-top: 10px; border: 1px solid #fe9230; padding: 10px 14px; border-radius: 8px;" href="/auth/google"><i style="margin-right: 14px;" class="fa-brands fa-google-plus-g "></i>SignIn with
+                      Google</a>
+
+                  </div>
+                  <p id="responseMessage" style="color: red; padding-top: 20px;"></p>
+
+                </div>
+              </div>
+            </div>
+            <div id="registerModal"
+              class="custom-modal hidden fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+              <div class="modalWrapper bg-white p-4 rounded-lg">
+                <p class="text-black font-semibold text-[23px] text-center modal-loginWrapper text-color">Register</p>
+                <div style="font-size: 26px;top: 5px;" class="right-30 absolute p-2  text-black z-50 cursor-pointer  sm:text-[23px]  text-color"
+                  onclick="closeModal('registerModal')">X</div>
+                <div class="flex flex-col gap-x-8 modal-loginInputWrapper">
+                  <div class="flex flex-col my-3 modal-loginInput1">
+                    <label class="mb-2 text-color">Name</label>
+                    <input id="user_login" type="text" placeholder="Enter Name"
+                      class="py-2 px-3 border-2 border-gray-500 outline-none rounded-md" type="text" />
+                  </div>
+                  <div class="flex flex-col my-3 modal-loginInput1">
+                    <label class="mb-2 text-color">Email</label>
+                    <input id="user_email" type="email" placeholder="Email"
+                      class="py-2 px-3 border-2 border-gray-500 outline-none rounded-md" type="text" />
+                  </div>
+                  <div class="flex flex-col my-3 modal-loginInput1">
+                    <label class="mb-2 text-color">Password</label>
+                    <input id="user_pass" type="password" placeholder="Password"
+                      class="py-2 px-3 border-2 border-gray-500 outline-none rounded-md" type="text" />
+                  </div>
+                  <div class="flex flex-col my-3">
+                    <button id="register-button" style=" display: table; margin: 0 auto;"
+                      class="register-button h-[50px] bg-[#070029] px-[20px] text-[15px] rounded-md text-white hover:bg-[#3a2a88]">
+                      Register
+                    </button>
+                    <p id="responseMessageRegister" style="color: red; padding-top: 20px;"></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+
+    <!-- Services Section -->
+
+    <section class="mt-16">
+      <div class="auto-container">
+        <div class="section-title text-center">
+          <h2 class="inline-block">Three tools.</h2>
+          <div class="inline-block">
+            <h2 class="inline-block text-color">One platform.</h2>
+            <span class="title-underline relative">
+              <img src="./images/underline.svg" alt="" />
+            </span>
+          </div>
+        </div>
+        <div class="grid grid-cols-12 gap-3 mt-7">
+          <!-- Service Block -->
+          <div class="service-block col-span-12 sm:col-span-6 md:col-span-4">
+            <div class="inner-box p-4">
+              <a href="">
+                <div class="icon-box">
+                  <i class="icon flaticon-web-design text-color"></i>
+                </div>
+                <div class="inner-box-title mt-5 flex items-center">
+                  <h6>Image generator</h6>
+                  <i class="fa fa-angle-right pl-3"></i>
+                </div>
+                <p class="opacity-70 mt-3">Text here</p>
+              </a>
+            </div>
+          </div>
+          <!-- Service Block -->
+          <div class="service-block col-span-12 sm:col-span-6 md:col-span-4">
+            <div class="inner-box p-4">
+              <a href="">
+                <div class="icon-box">
+                  <i class="icon flaticon-campaign text-color"></i>
+                </div>
+                <div class="inner-box-title mt-5 flex items-center">
+                  <h6>Text to speech</h6>
+                  <i class="fa fa-angle-right pl-3"></i>
+                </div>
+                <p class="opacity-70 mt-3">Text here</p>
+              </a>
+            </div>
+          </div>
+          <!-- Service Block -->
+          <div class="service-block col-span-12 sm:col-span-6 md:col-span-4">
+            <div class="inner-box p-4">
+              <a href="">
+                <div class="icon-box">
+                  <i class="icon flaticon-programmer text-color"></i>
+                </div>
+                <div class="inner-box-title mt-5 flex items-center">
+                  <h6>Software</h6>
+                  <i class="fa fa-angle-right pl-3"></i>
+                </div>
+                <p class="opacity-70 mt-3">Text here</p>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+
+    <section class="features-section mt-16">
+      <div class="auto-container">
+        <!-- Feature Block -->
+        <div class="grid grid-cols-12 items-center">
+          <div class="feature-block-text order-last md:order-first col-span-12 md:col-start-1 md:col-span-5">
+            <div class="inner-box-text">
+              <h6>Perfect words, every time</h6>
+              <p class="opacity-70 mt-3">
+                Make your writing stand out. From spicing up sentences to stepping up style, our tools help your ideas
+                shine. We
+                enhance your ideas—we don’t replace them.
+              </p>
+            </div>
+          </div>
+          <div
+            class="feature-block-image col-span-8 col-start-3 sm:col-span-6 sm:col-start-4 md:col-span-3 md:col-end-11">
+            <div class="inner-box-image">
+              <img src="./images/design.png" alt="" />
+            </div>
+          </div>
+        </div>
+        <!-- Feature Block -->
+        <div class="grid grid-cols-12 items-center">
+          <div
+            class="feature-block-image col-span-8 col-start-3 sm:col-span-6 sm:col-start-4 md:col-span-3 md:col-start-1">
+            <div class="inner-box-image">
+              <img src="./images/audio-conversation.png" alt="" />
+            </div>
+          </div>
+          <div class="feature-block-text col-span-12 md:col-span-5 md:col-end-12">
+            <div class="inner-box-text">
+              <h6 class="text-color">Perfect words, every time</h6>
+              <p class="opacity-70 mt-3">
+                Make your writing stand out. From spicing up sentences to stepping up style, our tools help your ideas
+                shine. We
+                enhance your ideas—we don’t replace them.
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- Feature Block -->
+        <div class="grid grid-cols-12 items-center">
+          <div class="feature-block-text order-last md:order-first col-span-12 md:col-start-1 md:col-span-5">
+            <div class="inner-box-text">
+              <h6 class="text-color">Perfect words, every time</h6>
+              <p class="opacity-70 mt-3">
+                Make your writing stand out. From spicing up sentences to stepping up style, our tools help your ideas
+                shine. We
+                enhance your ideas—we don’t replace them.
+              </p>
+            </div>
+          </div>
+          <div
+            class="feature-block-image col-span-8 col-start-3 sm:col-span-6 sm:col-start-4 md:col-span-3 md:col-end-11">
+            <div class="inner-box-image">
+              <img src="./images/software.png" alt="" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Footer -->
+    <footer id="footer" class="main-footer">
+      <div class="auto-container">
+        <div class="call-to-action text-center mt-16">
+          <h2>Have any question? Get in touch with us</h2>
+          <a href="mailto:info@makingwithai.com">info@makingwithai.com</a>
+        </div>
+      </div>
+      <div class="user-links">
+        <div class="auto-container flex justify-evenly">
+          <a href="privacy-policy.html">Privacy Policy</a>
+          <a href="terms-and-conditions.html">Terms & Conditions</a>
+          <a href="faq.html">FAQ</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+      <div class="copyright-text text-center">&copy; 2024 AnyAITool</div>
+    </footer>
+  </div>
+
+  <!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/deeplab"></script> -->
+  <script src="./js/index.js">
+  </script>
+</body>
+
+</html>

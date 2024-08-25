@@ -1,0 +1,202 @@
+:root {
+    --background-color: #1e1e1e;
+    --text-color: #ffffff;
+    --link-color: #66b2ff; /* Regular link color */
+    --toolbar-link-color: #ffffff; /* Toolbar link color for dark theme */
+    --toolbar-link-hover-color: #aaaaaa; /* Toolbar link hover color for dark theme */
+    --button-background: #333333;
+    --button-border: #444444;
+    --input-background: #2d2d2d;
+    --input-color: #ffffff;
+    --separator-color: rgba(255, 255, 255, 0.5); /* Separator line color for dark theme */
+    --modal-background: rgba(0, 0, 0, 0.9);
+    --modal-content-background: #333333;
+    --close-color: #fff;
+  }
+  
+  body[data-theme='light'] {
+    --background-color: #f0f0f0;
+    --text-color: #333;
+    --link-color: #0099ff; /* Regular link color for light theme */
+    --toolbar-link-color: #000000; /* Toolbar link color for light theme */
+    --toolbar-link-hover-color: #555555; /* Toolbar link hover color for light theme */
+    --button-background: #ffffff;
+    --button-border: #ccc;
+    --input-background: #ffffff;
+    --input-color: #333;
+    --separator-color: rgba(0, 0, 0, 0.5); /* Separator line color for light theme */
+    --modal-background: rgba(211, 211, 211, 0.9);
+    --modal-content-background: #ffffff;
+    --close-color: #333;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    background-color: rgb(0, 0, 0);
+    background-image: radial-gradient(circle at top left, rgb(40, 40, 40), rgb(30, 30, 30), rgb(20, 20, 20));
+    background-size: cover;
+    color: var(--text-color);
+    margin: 0;
+    padding: 20px;
+    position: relative;
+  }
+  
+  body[data-theme='light'] {
+    background-color: #ffffff;
+    background-image: radial-gradient(circle at top left, rgb(240, 240, 240), rgb(230, 230, 230), rgb(220, 220, 220));
+  }
+  
+  a {
+    text-decoration: none;
+    color: var(--link-color);
+  }
+  
+  img {
+    max-width: 100%;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  
+  .theme-toggle {
+    cursor: pointer;
+    margin-right: 20px;
+    margin-top: 2px;
+  }
+  
+  .theme-toggle i {
+    font-size: 20px;
+    color: var(--text-color);
+    transition: color 0.3s;
+    margin-top: -356px;
+    margin-left: 376px;
+    z-index: -9999px;
+    position: absolute;
+  }
+  
+  .theme-toggle i.fa-circle-half-stroke:hover {
+    color: #aaaaaa;
+  }
+  
+  body[data-theme='light'] .toolbar a:hover {
+    color: #555555; /* Light gray for light theme */
+  }
+  
+  body:not([data-theme='light']) .toolbar a:hover {
+    color: #aaaaaa; /* Light gray for dark theme */
+  }
+  
+  .logo {
+    position: relative;
+    cursor: default;
+    left: 10px;
+    width: 400px;
+    cursor: default;
+  }
+  
+  #footer {
+    margin-top: 524px;
+    padding: 10px;
+    text-align: center;
+    font-size: 14px;
+    color: #ffffffaa;
+  }
+  
+  @media (max-width: 768px) {
+    .theme-toggle {
+      margin-top: 10px;
+    }
+  
+    .logo {
+      max-width: 100%;
+      margin-top: 150px;
+    }
+  
+    #footer {
+      margin-top: 50px;
+    }
+  }
+  
+  body[data-theme='light'] #footer {
+    color: #000000;
+  }
+  
+  .footer-links {
+    font-size: 12px;
+    margin-top: 10px;
+  }
+  
+  .underline {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .underline::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -5px; /* Adjust as necessary */
+    height: 5px; /* Adjust as necessary */
+    background-color: #66b2ff; /* Adjust color as necessary */
+    z-index: -1;
+  }
+  
+  .wrapper {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: inline-block;
+  }
+  
+  .hamburger-icon {
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--text-color);
+    transition: transform 0.6s ease; /* Smooth rotation */
+  }
+  
+  .hamburger-icon.rotate {
+    transform: rotate(180deg); /* Rotate 180 degrees */
+  }
+  
+  .menu {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    background-color: var(--input-background);
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth sliding effect */
+    pointer-events: none; /* Prevent clicks when hidden */
+    padding: 10px;
+  }
+  
+  .menu.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0); /* Slide down smoothly */
+    pointer-events: auto; /* Allow clicks when shown */
+  }
+  
+  .menu a {
+    color: var(--text-color);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .menu a:hover {
+    background-color: var(--button-background);
+  }
+  
+  .horizontal-separator {
+    width: 100%;
+    height: 1px;
+    background-color: var(--separator-color);
+    margin: 10px 0;
+  }
+  

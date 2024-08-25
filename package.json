@@ -1,0 +1,37 @@
+{
+  "name": "proxy-server",
+  "version": "1.0.0",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node -r dotenv/config server.js",
+    "build": "npx tailwindcss -i ./public/css/style.css -o ./public/css/output.css --watch",
+    "dev": "nodemon -r dotenv/config server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "Proxy server for AI Image Generator",
+  "dependencies": {
+    "@huggingface/inference": "^2.8.0",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "http-proxy-middleware": "^3.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.5.3",
+    "node-fetch": "^2.7.0",
+    "passport": "^0.7.0",
+    "passport-google-oauth2": "^0.2.0",
+    "passport-google-oauth20": "^2.0.0",
+    "sharp": "^0.33.4",
+    "winston": "^3.13.1"
+  },
+  "devDependencies": {
+    "dotenv": "^16.4.5",
+    "nodemon": "^3.1.4",
+    "tailwindcss": "^3.4.10"
+  }
+}
